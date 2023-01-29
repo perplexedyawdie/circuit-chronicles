@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef, useCallback, useContext } from 'react'
 import ReactGlobe, { GlobeMethods } from 'react-globe.gl'
 import earthMarble from '../assets/earth-blue-marble.jpg'
 import nightSky from '../assets/night-sky.png'
+import CircuitContext from '../context/CircuitContext'
 import circuitLocations from '../data/circuitLocation.json'
+
 interface MarkerData {
     lat: number,
     lng: number,
@@ -33,15 +35,7 @@ const RING_PROPAGATION_SPEED = 5; // deg/sec
 
 function Globe() {
     const globeRef = useRef<GlobeMethods | undefined>(undefined)
-    // const arcsData = circuitLocations.map((loc, idx, arr) => ({
-    //     startLat: loc.lat,
-    //     startLng: loc.lng,
-    //     endLat: arr[idx < (arr.length - 1) ? idx + 1 : 0].lat,
-    //     endLng: arr[idx < (arr.length - 1) ? idx + 1 : 0].lng,
-    //     color: [['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)], ['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)]]
-    // }));
-    // console.table(arcsData)
-
+    const { data } = useContext(CircuitContext)
     const gData: MarkerData[] = circuitLocations.map((loc) => ({
         lat: loc.lat,
         lng: loc.lng,
@@ -108,6 +102,8 @@ function Globe() {
                 lng: circuitLocations[circuitIdx].lng
             }
             emitArc(circuitCoords)
+            data.setCurrentCircuit(circuitIdx)
+
         }
     }, [circuitIdx])
 
@@ -121,20 +117,10 @@ function Globe() {
                 backgroundImageUrl={nightSky}
                 width={800}
                 height={800}
-                // arcsData={arcsData}
-                // arcColor={'color'}
-                // arcDashLength={() => Math.random()}
-                // arcDashGap={() => Math.random()}
-                // arcDashAnimateTime={() => Math.random() * 4000 + 500}
                 htmlElementsData={gData}
                 htmlElement={(d) => {
                     const el: HTMLDivElement = document.createElement('div');
                     el.innerHTML = d?.emoji;
-                    // el.className = "tooltip tooltip-open";
-                    // el.setAttribute("data-tip", d.circuitName)
-                    // el.style.color = d.color;
-                    // el.style.width = `${d.size}px`;
-
                     el.style['pointerEvents'] = 'auto';
                     el.style.cursor = 'pointer';
                     el.onclick = () => console.info(d);
