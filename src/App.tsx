@@ -4,6 +4,7 @@ import titleLogo from './assets/title.png'
 import './App.css'
 import Globe from './components/Globe'
 import CircuitContext from './context/CircuitContext'
+import CircuitData from './components/CircuitData'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,15 +18,13 @@ function App() {
     <CircuitContext.Provider value={{ data: { currentCircuit, setCurrentCircuit } }}>
       <div className="hero min-h-screen bg-base-200 items-start">
         <div className="hero-content w-full flex-col space-y-10">
-          <img src={titleLogo} alt="Logo" />
+          <img src={titleLogo} alt="Logo" className="object-contain" />
           <div className="flex flex-col items-center w-full">
-            <div className="max-w-md px-12 flex flex-col justify-center items-center">
+            <div className="w-full flex flex-col justify-center items-center">
               <Globe />
             </div>
-            <div className="max-w-md px-12">
-              <h1 className="text-5xl font-bold">Hello there</h1>
-              <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-              <button className="btn btn-primary">Get Started</button>
+            <div className="w-full">
+              <CircuitData />
             </div>
           </div>
         </div>

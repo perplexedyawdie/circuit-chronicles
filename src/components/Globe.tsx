@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback, useContext } from 'react'
+import React, { useState, useEffect, useRef, useCallback, useContext, useLayoutEffect } from 'react'
 import ReactGlobe, { GlobeMethods } from 'react-globe.gl'
 import earthMarble from '../assets/earth-blue-marble.jpg'
 import nightSky from '../assets/night-sky.png'
@@ -35,7 +35,15 @@ const RING_PROPAGATION_SPEED = 5; // deg/sec
 
 function Globe() {
     const globeRef = useRef<GlobeMethods | undefined>(undefined)
+    const layoutRf = useRef<HTMLDivElement>(null);
     const { data } = useContext(CircuitContext)
+    const [width, setWidth] = useState(0);
+
+    useLayoutEffect(() => {
+        if (layoutRf.current) {
+            setWidth(layoutRf.current.offsetWidth);
+        }
+    }, []);
     const gData: MarkerData[] = circuitLocations.map((loc) => ({
         lat: loc.lat,
         lng: loc.lng,
@@ -109,14 +117,14 @@ function Globe() {
 
 
     return (
-        <>
+        <div ref={layoutRf} className="w-full flex justify-center items-center flex-col">
             <ReactGlobe
                 ref={globeRef}
                 backgroundColor="rgba(0,0,0,0)"
                 globeImageUrl={earthMarble}
                 backgroundImageUrl={nightSky}
-                width={800}
-                height={800}
+                width={width}
+                height={width/ (4/3)}
                 htmlElementsData={gData}
                 htmlElement={(d) => {
                     const el: HTMLDivElement = document.createElement('div');
@@ -140,12 +148,12 @@ function Globe() {
                 ringPropagationSpeed={RING_PROPAGATION_SPEED}
                 ringRepeatPeriod={FLIGHT_TIME * ARC_REL_LEN / NUM_RINGS}
             />
-            <div className="btn-group w-full flex justify-between items-center">
+            <div className="btn-group max-w-md flex justify-between items-center">
                 <button onClick={(e) => handlePrevBtnClick()} className="btn">Prev</button>
                 <p className="font-semibold">{circuitLocations[circuitIdx].circuitName}</p>
                 <button onClick={(e) => handleNextBtnClick()} className="btn">Next</button>
             </div>
-        </>
+        </div>
     )
 }
 
