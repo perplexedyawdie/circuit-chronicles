@@ -12,7 +12,7 @@ function App() {
       <div className="hero-content w-full flex-col space-y-10">
         <img src={titleLogo} alt="Logo" />
         <div className="flex flex-col items-center w-full">
-          <div className="max-w-md px-12 flex justify-center items-center">
+          <div className="max-w-md px-12 flex flex-col justify-center items-center">
             <Globe />
           </div>
           <div className="max-w-md px-12">
