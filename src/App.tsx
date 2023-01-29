@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
+// @ts-ignore
 import reactLogo from './assets/react.svg'
+// @ts-ignore
 import titleLogo from './assets/title.png'
 import './App.css'
 import Globe from './components/Globe'

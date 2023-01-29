@@ -1,16 +1,28 @@
 import React, { useContext, useEffect, useState } from 'react'
 import CircuitContext from '../context/CircuitContext'
+// @ts-ignore
 import australia from '../assets/australia.png'
+// @ts-ignore
 import bahrain from '../assets/bahrain.png'
+// @ts-ignore
 import baku from '../assets/baku.png'
+// @ts-ignore
 import barcelona from '../assets/barcelona.png'
+// @ts-ignore
 import british from '../assets/british-gp.png'
+// @ts-ignore
 import canada from '../assets/canada.png'
+// @ts-ignore
 import italy from '../assets/italy-imola.png'
+// @ts-ignore
 import miami from '../assets/miami.png'
+// @ts-ignore
 import monaco from '../assets/monaco.png'
+// @ts-ignore
 import jeddah from '../assets/saudi-arabia-jeddah.png'
+// @ts-ignore
 import raceResults from '../data/raceResults.json'
+// @ts-ignore
 import circuitLocations from '../data/circuitLocation.json'
 const bgs = [
     australia,
@@ -57,6 +69,7 @@ function CircuitData() {
         <div className="card full bg-base-100 shadow-xl image-full">
             <figure><img className="object-cover w-full transition-all ease-in duration-700 opacity-100" src={bgs[bg]} alt="Shoes" /></figure>
             <div className="card-body">
+            {/* @ts-ignore */}
                 <h2 className="card-title"><div className="radial-progress bg-primary text-primary-content border-4 border-primary" style={{ "--value": (Math.round((raceRound / 22) * 100)) }}>{(Math.round((raceRound / 22) * 100))}%</div></h2>
                 <h1 className="font-bold text-6xl mb-12">Race Facts</h1>
                 <div className="flex flex-col justify-center items-center space-y-8">
