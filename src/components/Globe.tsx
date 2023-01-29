@@ -117,7 +117,7 @@ function Globe() {
 
 
     return (
-        <div ref={layoutRf} className="w-full flex justify-center items-center flex-col">
+        <div ref={layoutRf} className="w-full flex justify-center items-center flex-col space-y-4">
             <ReactGlobe
                 ref={globeRef}
                 backgroundColor="rgba(0,0,0,0)"
@@ -148,9 +148,11 @@ function Globe() {
                 ringPropagationSpeed={RING_PROPAGATION_SPEED}
                 ringRepeatPeriod={FLIGHT_TIME * ARC_REL_LEN / NUM_RINGS}
             />
-            <div className="btn-group max-w-md flex justify-between items-center">
+            <div>
+            <p className="font-semibold">{circuitLocations[circuitIdx].circuitName}</p>
+            </div>
+            <div className="btn-group max-w-md flex justify-between items-center space-x-4">
                 <button onClick={(e) => handlePrevBtnClick()} className="btn">Prev</button>
-                <p className="font-semibold">{circuitLocations[circuitIdx].circuitName}</p>
                 <button onClick={(e) => handleNextBtnClick()} className="btn">Next</button>
             </div>
         </div>

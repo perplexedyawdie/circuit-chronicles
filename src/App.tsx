@@ -19,7 +19,7 @@ function App() {
       <div className="hero min-h-screen bg-base-200 items-start">
         <div className="hero-content w-full flex-col space-y-10">
           <img src={titleLogo} alt="Logo" className="object-contain" />
-          <div className="flex flex-col items-center w-full">
+          <div className="flex flex-col items-center w-full space-y-8">
             <div className="w-full flex flex-col justify-center items-center">
               <Globe />
             </div>
